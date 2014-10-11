@@ -7,7 +7,7 @@ class AuthenticationMailer < Devise::Mailer
     twilio_client.messages.create(
       from: ENV["TWILIO_APP_PHONE_NUMBER"],
       to: record.phone_number,
-      body: "Click on this link to set your password on callforpractice.com. #{link_to_reset_password}"
+      body: "Call for Practice: Click on this link to set your password. #{link_to_reset_password}"
     )
   end
 
