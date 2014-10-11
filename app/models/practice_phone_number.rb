@@ -24,6 +24,8 @@ class PracticePhoneNumber < ActiveRecord::Base
   end
 
   def update_phone_number!
+    return true if phone_number.blank?
+
     twilio_phone_number = get_twilio_phone_number
     return unless twilio_phone_number
 
@@ -47,7 +49,7 @@ class PracticePhoneNumber < ActiveRecord::Base
     unless user_practice_phone_numbers.any? { |uppn| uppn.user == value }
       user_practice_phone_numbers.new(user: value)
     end
-    association(:owner).replace(value)
+    association(:owner).writer(value)
   end
 
   def to_s
