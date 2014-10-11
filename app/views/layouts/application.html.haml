@@ -9,7 +9,9 @@
 
   %body
     .container
-      = render "application/navigation"
+      = render "application/header"
       = render "application/flash", flash: flash
 
       = yield
+
+      = render "application/footer"
