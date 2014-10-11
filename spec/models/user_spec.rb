@@ -1,6 +1,11 @@
 RSpec.describe User do
 
+  it { is_expected.to have_attribute :first_name }
+  it { is_expected.to have_attribute :last_name }
+
   describe "phone_number" do
+    it { is_expected.to validate_presence_of :phone_number }
+    
     it "is not valid when formatted incorrectly" do
       subject.phone_number = "a b c"
       subject.valid?

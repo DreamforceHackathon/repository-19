@@ -52,6 +52,16 @@ select[multiple=multiple] {
   }
 }
 
+.field_with_errors {
+  textarea, #{$all-text-inputs}, select[multiple=multiple] {
+    border-color: $form-border-error-color;
+    &:focus {
+      border-color: $form-border-error-color;
+      box-shadow: $form-box-error-shadow-focus;
+    }
+  }
+}
+
 textarea {
   resize: vertical;
 }

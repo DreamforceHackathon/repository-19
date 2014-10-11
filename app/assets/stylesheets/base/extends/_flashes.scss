@@ -15,6 +15,9 @@
   font-weight: bold;
   margin-bottom: $base-spacing / 2;
   padding: $base-spacing / 2;
+  ul {
+    font-weight: normal;
+  }
 }
 
 %flash-alert {

@@ -1,0 +1,14 @@
+.flash {
+  &.error {
+    @extend %flash-error;
+  }
+  &.alert {
+    @extend %flash-alert;
+  }
+  &.notice {
+    @extend %flash-notice;
+  }
+  &.success {
+    @extend %flash-success;
+  }
+}
