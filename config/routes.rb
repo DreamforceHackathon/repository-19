@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   end
 
   post "recording_dummy", to: "recording_dummy#create", as: :recording_dummy
-  post "post_recording/:id", to: "post_recoding#create", as: :post_recording
+  post "post_recording/:id", to: "post_recording#create", as: :post_recording
 
   resources :user_practice_phone_numbers
   resources :scenarios
