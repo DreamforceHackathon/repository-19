@@ -1,4 +1,5 @@
 class IncomingCallsController < ApplicationController
+  skip_before_action :verify_authenticity_token
 
   def create
     @practice_phone_number = PracticePhoneNumber.find(params[:practice_phone_number_id])
