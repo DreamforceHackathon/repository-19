@@ -12,10 +12,10 @@ class IncomingCallsController < ApplicationController
 
       render xml: response.text and return
     else
-      @incoming_call = @practice_phone_number.incoming_calls.new(twilio_sid: params["CallSid"])
+      @incoming_call = @practice_phone_number.incoming_calls.create(twilio_sid: params["CallSid"], user: @user)
       response = Twilio::TwiML::Response.new do |r|
         r.Play ActionController::Base.helpers.asset_url("cash_register.mp3")
-        r.Gather timeout: 60, numDigits: 1, method: "GET" do
+        r.Gather timeout: 60, numDigits: 1, method: "POST", action: incoming_call_purpose_routing_url(@incoming_call) do
           r.Say "What would you like to do?"
           3.times do
             r.Say "Press 1 to practice."
