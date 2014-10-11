@@ -6,6 +6,8 @@ class RecordingDummyController < ApplicationController
       r.Play ActionController::Base.helpers.asset_url("short_beep.mp3")
       r.Pause length: 600
     end
+
+    render xml: response.text
   end
 
 end
