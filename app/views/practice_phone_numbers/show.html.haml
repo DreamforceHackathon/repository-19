@@ -6,8 +6,12 @@
   %dt Users
   %dd
     %ul
-      - (@practice_phone_number.users - [@practice_phone_number.owner]).each do |user|
-        %li= user
+      - @practice_phone_number.user_practice_phone_numbers.select do |uppn|
+        - uppn.user != @practice_phone_number.owner
+      - end.each do |user_practice_phone_number|
+        %li
+          = user_practice_phone_number.user
+          = link_to "remove", user_practice_phone_number_path(user_practice_phone_number), method: :delete, rel: "nofollow", class: "delete"
 
       - @user_practice_phone_number = UserPracticePhoneNumber.new(practice_phone_number: @practice_phone_number)
       - @user_practice_phone_number.build_user
