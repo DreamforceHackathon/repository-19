@@ -14,7 +14,7 @@ class ScenarioRoutingController < ApplicationController
         if !valid_digits.include?(digits)
           r.Say "#{digits} is not a valid choice. Please try again."
         else
-          scenario = scenarios[digits - 1]
+          scenario = scenarios[digits.to_i - 1]
           r.Say "You selected #{digits}, #{scenario.name}."
           r.Say "Record after the beeps. When you're done with each recording, press hashtag."
           prompt = scenario.rank(:sequence).first
