@@ -1,5 +1,26 @@
-- if user_signed_in?
-  = link_to "Sign out", destroy_user_session_path, :method => :delete
-- else
-  = link_to "Sign in", new_user_session_path
-  = link_to "Register", new_user_registration_path
+%header.centered-navigation
+  .centered-navigation-wrapper
+    %a.mobile-logo{href: "javascript:void(0)"}
+      = image_tag "https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_3_dark.png"
+    %a.centered-navigation-menu-button{href: ""} MENU
+    %ul.centered-navigation-menu
+      %li.nav-link.more
+        %a{href: "javascript:void(0)"} User
+        - if user_signed_in?
+          %ul.submenu
+            %li= link_to "Sign out", destroy_user_session_path, method: :delete
+        - else
+          %ul.submenu
+            %li= link_to "Sign in", new_user_session_path
+            %li= link_to "Register", new_user_registration_path
+      %li.nav-link
+        %a{href: "javascript:void(0)"} Products
+      %li.nav-link
+        %a{href: "javascript:void(0)"} Contact
+      %li.nav-link.logo
+        %a.logo{href: "javascript:void(0)"}
+          %img{src: "https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_3_dark.png" }
+      %li.nav-link
+        %a{href: "javascript:void(0)"} Testimonials
+      %li.nav-link
+        %a{href: "javascript:void(0)"} About Us

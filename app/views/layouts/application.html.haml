@@ -7,7 +7,8 @@
   = csrf_meta_tags
 
   %body
-    = render "application/flash", flash: flash
-    = render "application/navigation"
-    %h1 Call for Practice
-    = yield
+    .container
+      = render "application/navigation"
+      = render "application/flash", flash: flash
+      
+      = yield
