@@ -6,7 +6,7 @@
   = f.input :phone_number, autofocus: true
 
   = f.input :password, hint: user_password_input_hint(@minimum_password_length, @validatable)
-  = f.input :password, label: "Confirm Password", autocomplete: "off"
+  = f.input :password, label: "Confirm Password"
 
   = f.submit "Sign up"
 
