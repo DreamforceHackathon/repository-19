@@ -6,7 +6,7 @@ class ScenarioRoutingController < ApplicationController
 
     digits = params["Digits"]
     scenarios = @incoming_call.practice_phone_number.scenarios.rank(:sequence).to_a
-    valid_digits = (1..(scenarios.count)).to_a
+    valid_digits = (1..(scenarios.count)).to_a.collect(&:to_s)
 
     response = Twilio::TwiML::Response.new do |r|
 
