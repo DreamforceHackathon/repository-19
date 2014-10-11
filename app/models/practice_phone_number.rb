@@ -21,7 +21,7 @@ class PracticePhoneNumber < ActiveRecord::Base
     twilio_phone_number = twilio_client.account.incoming_phone_numbers.create(
       area_code: area_code,
       friendly_name: name,
-      voice_url: practice_phone_number_incoming_calls_url(self, format: :xml),
+      voice_url: practice_phone_number_incoming_calls_url(id, format: :xml),
       voice_method: "POST"
     )
     update(phone_number: twilio_phone_number.phone_number)
@@ -37,7 +37,7 @@ class PracticePhoneNumber < ActiveRecord::Base
   end
 
   def to_s
-    name + "(#{phone_number})"
+    "#{name} (#{phone_number})"
   end
 
 private

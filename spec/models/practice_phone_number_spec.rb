@@ -6,14 +6,9 @@ RSpec.describe PracticePhoneNumber do
   it { is_expected.to have_many :scenarios }
 
   it "can purchase a phone number" do
-    subject = FactoryGirl.build(:practice_phone_number)
+    subject = FactoryGirl.build_stubbed(:practice_phone_number)
+    expect(subject).to receive(:update).with(phone_number: "+15005550006").and_return(true)
     expect(subject.purchase_phone_number!).to eq true
-    expect(subject.phone_number).to_not be_blank
-  end
-
-  it "purchases a phone number before save" do
-    expect(subject).to receive(:purchase_phone_number!)
-    subject.run_callbacks(:create)
   end
 
   it "adds the owner to the users in the setter" do
