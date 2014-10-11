@@ -31,3 +31,7 @@ group :test do
   gem 'shoulda-matchers', require: false
   gem 'capybara', '~> 2.4.3'
 end
+
+group :production do
+  gem 'rails_12factor'
+end
