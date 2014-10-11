@@ -1,6 +1,8 @@
 class PracticePhoneNumber < ActiveRecord::Base
+  include Rails.application.routes.url_helpers
 
   before_create :purchase_phone_number!
+  after_commit :update_phone_number_with_url!
   before_destroy :return_phone_number!
 
   validates :name, presence: true
@@ -15,14 +17,27 @@ class PracticePhoneNumber < ActiveRecord::Base
   def purchase_phone_number!
     return true if phone_number.present?
 
-    twilio_phone_number = twilio_client.account.incoming_phone_numbers.create(area_code: area_code)
+    twilio_phone_number = twilio_client.account.incoming_phone_numbers.create(
+      area_code: area_code
+    )
     update(phone_number: twilio_phone_number.phone_number)
+  end
+
+  def update_phone_number!
+    twilio_phone_number = get_twilio_phone_number
+    return unless twilio_phone_number
+
+    twilio_phone_number.update(
+      friendly_name: name,
+      voice_url: practice_phone_number_incoming_calls_url(self, format: :xml),
+      voice_method: "POST"
+    )
   end
 
   def return_phone_number!
     return true if phone_number.blank?
 
-    twilio_phone_number = twilio_client.account.incoming_phone_numbers.list(phone_number: phone_number).first
+    twilio_phone_number = get_twilio_phone_number
     return true if twilio_phone_number.nil?
 
     twilio_phone_number.delete
@@ -43,6 +58,10 @@ private
 
   def twilio_client
     @twilio_client ||= Twilio::REST::Client.new(ENV["TWILIO_ACCOUNT_SID"], ENV["TWILIO_AUTH_TOKEN"])
+  end
+
+  def get_twilio_phone_number
+    twilio_client.account.incoming_phone_numbers.list(phone_number: phone_number).first
   end
 
   def area_code
