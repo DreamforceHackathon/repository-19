@@ -2,7 +2,7 @@ class PracticePhoneNumber < ActiveRecord::Base
   include Rails.application.routes.url_helpers
 
   before_create :purchase_phone_number!
-  after_commit :update_phone_number_with_url!
+  after_commit :update_phone_number!
   before_destroy :return_phone_number!
 
   validates :name, presence: true
