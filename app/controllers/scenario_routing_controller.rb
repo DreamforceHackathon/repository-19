@@ -15,6 +15,7 @@ class ScenarioRoutingController < ApplicationController
         end
       end
     end
+    render xml: response.text
   end
 
 end
