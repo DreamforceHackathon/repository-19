@@ -8,4 +8,3 @@ $ ->
   $(document).on "submit", "form[action='/users/sign_in']", (event) ->
     i = $(this).find("input[name='user[phone_number]']")
     i.val(clean_phone_number(i.val()))
-    event.preventDefault()
