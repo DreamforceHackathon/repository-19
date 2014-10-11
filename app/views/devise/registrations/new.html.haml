@@ -9,7 +9,6 @@
   = f.input :phone_number
 
   = f.input :password, hint: user_password_input_hint(@minimum_password_length, @validatable), required: true
-  = f.input :password_confirmation, autocomplete: "off", required: true
 
   = f.submit "Sign up"
 
