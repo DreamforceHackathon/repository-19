@@ -5,14 +5,17 @@ class PurposeRoutingController < ApplicationController
     @incoming_call = IncomingCall.find(params[:incoming_call_id])
 
     digits = params["Digits"]
-
+    valid_digits = ["1","2"]
     response = Twilio::TwiML::Response.new do |r|
-      if ["1","2"].include?(digits)
-        r.Say "You pressed #{params["Digits"]}."
-        r.Say "I found incoming call number #{@incoming_call.id}."
-      elsif digits.present?
-        r.Say "#{digits} is not a valid choice. Please try again."
-      end
+      if digits.present?
+        if !valid_digits.include?(digits)
+          r.Say "#{digits} is not a valid choice. Please try again."
+        else
+          r.Say "You pressed #{params["Digits"]}."
+          r.Say "I found incoming call number #{@incoming_call.id}."
+          r.Redirect incoming_call_scenario_routing_path(@incoming_call), method: "POST"
+        end
+      else
       r.Gather timeout: 10, numDigits: 1, method: "POST" do
         r.Say "What would you like to do?"
         3.times do
