@@ -4,4 +4,7 @@ form {
       color: $form-border-error-color;
     }
   }
+  &.hidden {
+    display: none;
+  }
 }

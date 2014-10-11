@@ -25,6 +25,14 @@ class PracticePhoneNumbersController < ApplicationController
     authorize @practice_phone_number
   end
 
+  def update
+    @practice_phone_number = PracticePhoneNumber.find(params[:id])
+    if @practice_phone_number.update(practice_phone_number_params)
+      flash[:notice] = "Practice phone number updated successfully."
+    end
+    redirect_to @practice_phone_number
+  end
+
 private
 
   def practice_phone_number_params
