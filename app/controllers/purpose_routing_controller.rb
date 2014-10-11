@@ -1,4 +1,5 @@
 class PurposeRoutingController < ApplicationController
+  skip_before_action :verify_authenticity_token
 
   def create
     @incoming_call = IncomingCall.find(params[:incoming_call_id])
