@@ -12,3 +12,7 @@ end
 if ENV["TWILIO_APP_PHONE_NUMBER"].blank?
   raise MissingTwilioConfigError, "you must add a TWILIO_APP_PHONE_NUMBER environment variable"
 end
+
+if ENV["TWILIO_RECORDING_PHONE_NUMBER"].blank?
+  raise MissingTwilioConfigError, "you must add a TWILIO_RECORDING_PHONE_NUMBER environment variable"
+end
