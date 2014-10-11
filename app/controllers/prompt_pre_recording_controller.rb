@@ -5,7 +5,7 @@ class PromptPreRecordingController < ApplicationController
     @incoming_call = IncomingCall.find(params[:incoming_call_id])
     @prompt = Prompt.find(params[:prompt_id])
 
-    prompt_sequence = @prompt.scenario.prompts.ranks(:sequence).pluck(:id).index(@prompt.id) + 1
+    prompt_sequence = @prompt.scenario.prompts.rank(:sequence).pluck(:id).index(@prompt.id) + 1
 
     response = Twilio::TwiML::Response.new do |r|
       r.Say "Question number #{prompt_sequence}."
