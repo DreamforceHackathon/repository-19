@@ -3,11 +3,11 @@ class IncomingCallsController < ApplicationController
 
   def create
     @practice_phone_number = PracticePhoneNumber.find(params[:practice_phone_number_id])
-    @user = User.find_by(phone_number: params["CallSid"])
+    @user = @practice_phone_number.users.find_by(phone_number: params["From"])
 
     if @user.nil?
       response = Twilio::TwiML::Response.new do |r|
-        r.Say "You are not authorized to call this number. Goodbye."
+        r.Say "You are not authorized to call for practice on this number. Goodbye."
       end
 
       render xml: response.text and return
