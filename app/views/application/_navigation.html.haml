@@ -4,8 +4,17 @@
       = image_tag "call_for_practice_icon_64x64.png"
     %a.centered-navigation-menu-button{href: ""} MENU
     %ul.centered-navigation-menu
+      %li.nav-link.logo
+        = link_to root_path, class: "logo" do
+          = image_tag "call_for_practice_icon_64x64.png"
+      %li.nav-link
+        %a{href: "javascript:void(0)"} Contact
+      %li.nav-link
+        %a{href: "javascript:void(0)"} Testimonials
+      %li.nav-link
+        %a{href: "javascript:void(0)"} About Us
       %li.nav-link.more
-        %a{href: "javascript:void(0)"} User
+        %a User
         - if user_signed_in?
           %ul.submenu
             %li= link_to "Sign out", destroy_user_session_path, method: :delete
@@ -13,14 +22,3 @@
           %ul.submenu
             %li= link_to "Sign in", new_user_session_path
             %li= link_to "Register", new_user_registration_path
-      %li.nav-link
-        %a{href: "javascript:void(0)"} Products
-      %li.nav-link
-        %a{href: "javascript:void(0)"} Contact
-      %li.nav-link.logo
-        = link_to root_path, class: "logo" do
-          = image_tag "call_for_practice_icon_64x64.png"
-      %li.nav-link
-        %a{href: "javascript:void(0)"} Testimonials
-      %li.nav-link
-        %a{href: "javascript:void(0)"} About Us
