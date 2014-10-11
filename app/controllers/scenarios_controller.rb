@@ -10,10 +10,26 @@ class ScenariosController < ApplicationController
     redirect_to @scenario.practice_phone_number
   end
 
+  def destroy
+    @scenario = Scenario.find(params[:id])
+    if @scenario.destroy
+      flash[:notice] = "The scenario was deleted."
+    end
+    redirect_to @scenario.practice_phone_number
+  end
+
+  def update
+    @scenario = Scenario.find(params[:id])
+    if @scenario.update(scenario_params)
+      flash[:notice] = "The scenario was updated."
+    end
+    redirect_to @scenario.practice_phone_number
+  end
+
 private
 
   def scenario_params
-    params.require(:scenario).permit(:name, :practice_phone_number_id)
+    params.require(:scenario).permit(:name, :practice_phone_number_id, :sequence_position)
   end
 
 end

@@ -11,7 +11,7 @@
       - end.each do |user_practice_phone_number|
         %li
           = user_practice_phone_number.user
-          = link_to "remove", user_practice_phone_number_path(user_practice_phone_number), method: :delete, rel: "nofollow", class: "delete"
+          = link_to "remove", user_practice_phone_number_path(user_practice_phone_number), method: :delete, rel: "nofollow", class: "delete", data: { confirm: "Are you sure?" }
 
       - @user_practice_phone_number = UserPracticePhoneNumber.new(practice_phone_number: @practice_phone_number)
       - @user_practice_phone_number.build_user
@@ -24,11 +24,33 @@
   %dt Scenarios
   %dd
     %ol.scenarios
-      - @practice_phone_number.scenarios.rank(:sequence).each do |scenario|
-        %li
+      - scenarios_ranked = @practice_phone_number.scenarios.rank(:sequence).to_a
+      - scenarios_ranked.each do |scenario|
+        %li.scenario
           = scenario
-    - @scenario = @practice_phone_number.scenarios.new
-    = simple_form_for @scenario do |f|
+          %span.links
+            = link_to "delete", scenario_path(scenario), method: :delete, rel: "nofollow", data: { confirm: "Are you sure?" }
+            - unless scenarios_ranked.first == scenario
+              = link_to "move &uarr;".html_safe, scenario_path(scenario, scenario: { sequence_position: "up" }), method: :patch, rel: "nofollow"
+            - unless scenarios_ranked.last == scenario
+              = link_to "move &darr;".html_safe, scenario_path(scenario, scenario: { sequence_position: "down" }), method: :patch, rel: "nofollow"
+
+          %ol.prompts
+            - prompts_ranked = scenario.prompts.rank(:sequence).to_a
+            - prompts_ranked.each do |prompt|
+              %li.prompt
+                = prompt
+                %span.links
+                  = link_to "delete", prompt_path(prompt), method: :delete, rel: "nofollow", data: { confirm: "Are you sure?" }
+                  - unless prompts_ranked.first == prompt
+                    = link_to "move &uarr;".html_safe, prompt_path(prompt, prompt: { sequence_position: "up" }), method: :patch, rel: "nofollow"
+                  - unless prompts_ranked.last == prompt
+                    = link_to "move &darr;".html_safe, prompt_path(prompt, prompt: { sequence_position: "down" }), method: :patch, rel: "nofollow"
+          = simple_form_for scenario.prompts.new do |f|
+            = f.input :scenario_id, as: :hidden
+            = f.input :content, as: :string, label: false, placeholder: "Add another prompt."
+            = f.submit "Add prompt"
+    = simple_form_for @practice_phone_number.scenarios.new do |f|
       = f.input :practice_phone_number_id, as: :hidden
       = f.input :name, label: false, placeholder: "Add another scenario."
       = f.submit "Add scenario"

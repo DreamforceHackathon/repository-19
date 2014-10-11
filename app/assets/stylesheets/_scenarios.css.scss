@@ -1,0 +1,11 @@
+ol.scenarios {
+  @extend %default-ol;
+}
+
+li.scenario {
+  span.links {
+    a {
+      margin-left: 8px;
+    }
+  }
+}

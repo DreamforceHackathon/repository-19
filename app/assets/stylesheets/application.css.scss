@@ -9,6 +9,7 @@
 @import "errors";
 @import "forms";
 @import "scenarios";
+@import "prompts";
 
 .container {
   @include outer-container;

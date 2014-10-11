@@ -1,0 +1,21 @@
+ol.prompts {
+  @extend %default-ol;
+}
+
+ul.prompts {
+  padding-left: 20px;
+}
+
+li.prompt {
+  span.links {
+    a {
+      margin-left: 8px;
+    }
+  }
+}
+
+form.new_prompt {
+  input[type='submit'] {
+    font-size: 10px;
+  }
+}
