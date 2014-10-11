@@ -3,8 +3,7 @@ class PracticePhoneNumber < ActiveRecord::Base
 
   before_validation :add_owner_to_users_if_missing, if: :owner
 
-  before_create :purchase_phone_number!
-  after_commit :update_phone_number!
+  after_commit :purchase_phone_number!, on: [:create]
   before_destroy :return_phone_number!
 
   validates :name, presence: true
@@ -12,7 +11,7 @@ class PracticePhoneNumber < ActiveRecord::Base
   validate :users_includes_owner
 
   belongs_to :owner, class_name: "User"
-  has_many :user_practice_phone_numbers, inverse_of: :practice_phone_number
+  has_many :user_practice_phone_numbers, inverse_of: :practice_phone_number, dependent: :destroy
   has_many :users, through: :user_practice_phone_numbers, inverse_of: :practice_phone_numbers
   has_many :scenarios
 
@@ -20,22 +19,12 @@ class PracticePhoneNumber < ActiveRecord::Base
     return true if phone_number.present?
 
     twilio_phone_number = twilio_client.account.incoming_phone_numbers.create(
-      area_code: area_code
-    )
-    update(phone_number: twilio_phone_number.phone_number)
-  end
-
-  def update_phone_number!
-    return true if phone_number.blank?
-
-    twilio_phone_number = get_twilio_phone_number
-    return unless twilio_phone_number
-
-    twilio_phone_number.update(
+      area_code: area_code,
       friendly_name: name,
       voice_url: practice_phone_number_incoming_calls_url(self, format: :xml),
       voice_method: "POST"
     )
+    update(phone_number: twilio_phone_number.phone_number)
   end
 
   def return_phone_number!
