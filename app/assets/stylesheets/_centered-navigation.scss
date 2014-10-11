@@ -1,9 +1,9 @@
 .centered-navigation {
   $centered-navigation-padding: 1em;
   $centered-navigation-logo-height: 2em;
-  $centered-navigation-background: #1534f1;
-  $centered-navigation-color: transparentize($base-font-color, 0.3);
-  $centered-navigation-color-hover: $base-font-color;
+  $centered-navigation-background: $brand-color;
+  $centered-navigation-color: transparentize(white, 0.1);
+  $centered-navigation-color-hover: white;
   $centered-navigation-height: 60px;
   $centered-navigation-item-padding: 1em;
   $centered-navigation-submenu-padding: 1em;
@@ -13,7 +13,8 @@
 
   background-color: $centered-navigation-background;
   border-bottom: 1px solid darken($centered-navigation-background, 6);
-  font-family: $serif;
+  // font-family: $serif;
+
   height: $centered-navigation-height;
   width: 100%;
   z-index: 9999;
@@ -29,7 +30,6 @@
 
     img {
       max-height: $centered-navigation-height;
-      opacity: .6;
       padding: .8em 0;
     }
 
@@ -136,7 +136,6 @@
   .logo img {
     margin-bottom: -$centered-navigation-logo-height / 3;
     max-height: $centered-navigation-logo-height;
-    opacity: .6;
   }
 
 

@@ -1,0 +1,11 @@
+%h2 Resend confirmation instructions
+
+= simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
+  = f.error_notification
+  = f.full_error :confirmation_token
+
+  = f.input :phone_number, required: true, autofocus: true
+
+  = f.button :submit, "Resend confirmation instructions"
+
+= render "devise/shared/links"

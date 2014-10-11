@@ -1,7 +1,7 @@
 %header.centered-navigation
   .centered-navigation-wrapper
-    %a.mobile-logo{href: "javascript:void(0)"}
-      = image_tag "https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_3_dark.png"
+    = link_to root_path, class: "mobile-logo" do
+      = image_tag "call_for_practice_icon_64x64.png"
     %a.centered-navigation-menu-button{href: ""} MENU
     %ul.centered-navigation-menu
       %li.nav-link.more
@@ -18,8 +18,8 @@
       %li.nav-link
         %a{href: "javascript:void(0)"} Contact
       %li.nav-link.logo
-        %a.logo{href: "javascript:void(0)"}
-          %img{src: "https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_3_dark.png" }
+        = link_to root_path, class: "logo" do
+          = image_tag "call_for_practice_icon_64x64.png"
       %li.nav-link
         %a{href: "javascript:void(0)"} Testimonials
       %li.nav-link
