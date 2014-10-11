@@ -19,6 +19,7 @@ RSpec.describe PracticePhoneNumber do
   it "adds the owner to the users in the setter" do
     user = User.new
     subject.owner = user
+    subject.valid?
     expect(subject.users).to include user
   end
 
@@ -27,7 +28,7 @@ RSpec.describe PracticePhoneNumber do
 
   it "validates the inclusion of its owner in its users" do
     subject = FactoryGirl.build(:practice_phone_number)
-    expect(subject).to receive(:user_practice_phone_numbers).and_return([])
+    allow(subject).to receive(:user_practice_phone_numbers).and_return(UserPracticePhoneNumber.none)
     subject.valid?
     expect(subject.errors[:users]).to_not be_empty
   end

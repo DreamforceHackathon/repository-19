@@ -1,6 +1,8 @@
 class PracticePhoneNumber < ActiveRecord::Base
   include Rails.application.routes.url_helpers
 
+  before_validation :add_owner_to_users_if_missing, if: :owner
+
   before_create :purchase_phone_number!
   after_commit :update_phone_number!
   before_destroy :return_phone_number!
@@ -45,13 +47,6 @@ class PracticePhoneNumber < ActiveRecord::Base
     twilio_phone_number.delete
   end
 
-  def owner=(value)
-    unless user_practice_phone_numbers.any? { |uppn| uppn.user == value }
-      user_practice_phone_numbers.new(user: value)
-    end
-    association(:owner).writer(value)
-  end
-
   def to_s
     name + "(#{phone_number})"
   end
@@ -77,6 +72,13 @@ private
     unless user_practice_phone_numbers.any? { |uppn| uppn.user == owner }
       errors.add :users, "must include the owner"
     end
+  end
+
+  def add_owner_to_users_if_missing
+    return true unless owner
+    return if user_practice_phone_numbers.any? { |uppn| uppn.user == owner }
+
+    self.user_practice_phone_numbers.new(user: owner)
   end
 
 end
