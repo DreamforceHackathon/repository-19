@@ -1,16 +1,16 @@
 .hero {
   $hero-background-top: darken($base-accent-color, 25);
   $hero-background-bottom: adjust-hue($hero-background-top, -70);
-  $hero-color: white;
+  $hero-color: black;
   $gradient-angle: 10deg;
-  $hero-image: image-path("blurry_traffic_1.jpg");
+  $hero-image: image-path("blurry_traffic_blue_2.jpg");
 
   @include background(url($hero-image), linear-gradient($gradient-angle, $hero-background-bottom, $hero-background-top), no-repeat $hero-background-top scroll);
 
   background-repeat: no-repeat;
   background-position: top;
   background-size: cover;
-  padding-bottom: 4em;
+  padding-bottom: 2em;
 
   .hero-logo img {
     height: 3em;
@@ -35,24 +35,24 @@
       text-align: center;
 
       h1 {
-        font-size: 1.6em;
+        font-size: 2.0em;
         margin-bottom: .5em;
 
         @include media($large-screen) {
-          font-size: 1.8em;
+          font-size: 2.6em;
         }
       }
 
       p {
-        font-family: $serif;
+        // font-family: $serif;
         margin: auto;
-        margin-bottom: 3em;
-        font-weight: 200;
+        margin-bottom: 0.5em;
+        font-weight: 600;
         line-height: 1.4em;
 
         @include media($large-screen) {
           font-size: 1.1em;
-          max-width: 40%;
+          max-width: 60%;
         }
       }
     }
