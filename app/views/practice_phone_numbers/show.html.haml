@@ -21,3 +21,13 @@
         = f.fields_for :user do |f|
           = f.input :phone_number, placeholder: "Add an additional user.", label: false
         = f.submit "Add user"
+  %dt Scenarios
+  %dd
+    %ol.scenarios
+      - @practice_phone_number.scenarios.rank(:sequence).each do |scenario|
+        %li= scenario
+    - @scenario = @practice_phone_number.scenarios.new
+    = simple_form_for @scenario do |f|
+      = f.input :practice_phone_number_id, as: :hidden
+      = f.input :name, label: false, placeholder: "Add another scenario."
+      = f.submit "Add scenario"

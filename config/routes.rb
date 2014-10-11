@@ -4,5 +4,6 @@ Rails.application.routes.draw do
 
   resources :practice_phone_numbers
   resources :user_practice_phone_numbers
+  resources :scenarios
 
 end

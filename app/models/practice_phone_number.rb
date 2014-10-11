@@ -9,6 +9,7 @@ class PracticePhoneNumber < ActiveRecord::Base
   belongs_to :owner, class_name: "User"
   has_many :user_practice_phone_numbers, inverse_of: :practice_phone_number
   has_many :users, through: :user_practice_phone_numbers, inverse_of: :practice_phone_numbers
+  has_many :scenarios
 
   def purchase_phone_number!
     return true if phone_number.present?

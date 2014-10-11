@@ -3,6 +3,7 @@ RSpec.describe PracticePhoneNumber do
   it { is_expected.to validate_presence_of :name }
   it { is_expected.to have_many :user_practice_phone_numbers }
   it { is_expected.to have_many :users }
+  it { is_expected.to have_many :scenarios }
 
   it "can purchase a phone number" do
     subject = FactoryGirl.build(:practice_phone_number)

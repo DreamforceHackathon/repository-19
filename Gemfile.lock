@@ -129,6 +129,8 @@ GEM
       thor (>= 0.18.1, < 2.0)
     raindrops (0.13.0)
     rake (10.3.2)
+    ranked-model (0.4.0)
+      activerecord (>= 3.1.12)
     redis (3.1.0)
     redis-namespace (1.5.1)
       redis (~> 3.0, >= 3.0.4)
@@ -220,6 +222,7 @@ DEPENDENCIES
   pundit (~> 0.3.0)
   rails (= 4.1.6)
   rails_12factor
+  ranked-model (~> 0.4.0)
   rspec-rails (~> 3.1.0)
   sass-rails (~> 4.0.3)
   shoulda-matchers

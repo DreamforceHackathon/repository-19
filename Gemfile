@@ -16,6 +16,7 @@ gem 'neat', '~> 1.5.1'
 gem 'devise', '~> 3.4.0'
 gem 'pundit', '~> 0.3.0'
 gem 'twilio-ruby', '~> 3.13.1'
+gem 'ranked-model', '~> 0.4.0'
 
 group :development do
   gem 'spring'
