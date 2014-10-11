@@ -8,7 +8,7 @@ class PromptPreRecordingController < ApplicationController
     response = Twilio::TwiML::Response.new do |r|
       r.Say @prompt.content
       r.Pause length: 2
-      r.Redirect incoming_calls_recordings_path(@incoming_call, recordable_type: @prompt.class.to_s, recordable_id: @prompt.id)
+      r.Redirect incoming_call_recordings_path(@incoming_call, recordable_type: @prompt.class.to_s, recordable_id: @prompt.id)
     end
 
     render xml: response.text
