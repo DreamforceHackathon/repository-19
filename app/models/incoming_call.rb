@@ -5,5 +5,6 @@ class IncomingCall < ActiveRecord::Base
 
   validates :practice_phone_number, presence: true
   validates :user, presence: true
+  validates :twilio_sid, presence: true
 
 end

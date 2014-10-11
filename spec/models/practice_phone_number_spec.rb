@@ -4,6 +4,7 @@ RSpec.describe PracticePhoneNumber do
   it { is_expected.to have_many :user_practice_phone_numbers }
   it { is_expected.to have_many :users }
   it { is_expected.to have_many :scenarios }
+  it { is_expected.to have_many :incoming_calls }
 
   it "can purchase a phone number" do
     subject = FactoryGirl.build_stubbed(:practice_phone_number)
