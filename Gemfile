@@ -14,6 +14,7 @@ gem 'haml-rails', '~> 0.5.3'
 gem 'bourbon', '~> 3.2.1'
 gem 'neat', '~> 1.5.1'
 gem 'devise', '~> 3.4.0'
+gem 'pundit', '~> 0.3.0'
 gem 'twilio-ruby', '~> 3.13.1'
 
 group :development do

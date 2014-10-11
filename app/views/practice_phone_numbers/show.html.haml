@@ -1,0 +1,19 @@
+%h2= @practice_phone_number.name
+
+%dl
+  %dt Owner
+  %dd= @practice_phone_number.owner
+  %dt Users
+  %dd
+    %ul
+      - (@practice_phone_number.users - [@practice_phone_number.owner]).each do |user|
+        %li= user
+
+      - @user_practice_phone_number = UserPracticePhoneNumber.new(practice_phone_number: @practice_phone_number)
+      - @user_practice_phone_number.build_user
+
+      = simple_form_for @user_practice_phone_number do |f|
+        = f.input :practice_phone_number_id, as: :hidden
+        = f.fields_for :user do |f|
+          = f.input :phone_number, placeholder: "Add an additional user.", label: false
+        = f.submit "Add user"

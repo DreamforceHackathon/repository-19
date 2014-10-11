@@ -1,5 +1,7 @@
 %h2 Sign up
 
+- resource.password_required = true
+
 = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
   = devise_error_messages!
 
@@ -8,7 +10,8 @@
 
   = f.input :phone_number
 
-  = f.input :password, hint: user_password_input_hint(@minimum_password_length, @validatable), required: true
+  = f.input :password, hint: user_password_input_hint(@minimum_password_length, @validatable), required: resource.password_required
+  = f.input :password_required, as: :hidden
 
   = f.submit "Sign up"
 

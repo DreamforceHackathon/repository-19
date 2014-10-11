@@ -1,3 +1,7 @@
+.flashes {
+  margin-top: 8px;
+}
+
 .flash {
   &.error {
     @extend %flash-error;
