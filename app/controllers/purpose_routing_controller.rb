@@ -15,7 +15,7 @@ class PurposeRoutingController < ApplicationController
           r.Say "I found incoming call number #{@incoming_call.id}."
           r.Redirect incoming_call_scenario_routing_path(@incoming_call), method: "POST"
         end
-      else
+      end
       r.Gather timeout: 10, numDigits: 1, method: "POST" do
         r.Say "What would you like to do?"
         3.times do
