@@ -8,7 +8,7 @@ class IncomingCallsController < ApplicationController
     if @user.nil?
       response = Twilio::TwiML::Response.new do |r|
         r.Say "You are not authorized to call this number. Goodbye."
-      end.text
+      end
 
       render xml: response.text and return
     else
@@ -16,7 +16,7 @@ class IncomingCallsController < ApplicationController
       response = Twilio::TwiML::Response.new do |r|
         r.Say "Beep. Beep. Beep."
         r.Say "What would you like to do?"
-      end.text
+      end
 
       render xml: resopnse.text and return
     end
