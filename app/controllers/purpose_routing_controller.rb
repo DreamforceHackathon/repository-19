@@ -5,10 +5,9 @@ class PurposeRoutingController < ApplicationController
     @incoming_call = IncomingCall.find(params[:incoming_call_id])
 
     digits = params["Digits"]
-
-    if digits.blank?
-      response = Twilio::TwiML::Response.new do |r|
-        r.Play ActionController::Base.helpers.asset_url("cash_register.mp3")
+  
+    response = Twilio::TwiML::Response.new do |r|
+      if digits.blank?
         r.Gather timeout: 10, numDigits: 1, method: "POST" do
           r.Say "What would you like to do?"
           3.times do
@@ -17,15 +16,12 @@ class PurposeRoutingController < ApplicationController
             r.Pause length: 1
           end
         end
-      end
-      render xml: response.text and return
-    else
-      response = Twilio::TwiML::Response.new do |r|
+      else
         r.Say "You pressed #{params["Digits"]}."
         r.Say "I found incoming call number #{@incoming_call.id}."
       end
-      render xml: response.text and return
     end
+    render xml: response.text
   end
 
 end
