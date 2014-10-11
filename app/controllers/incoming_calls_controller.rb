@@ -14,7 +14,7 @@ class IncomingCallsController < ApplicationController
     else
       @incoming_call = @practice_phone_number.incoming_calls.new(twilio_sid: params["CallSid"])
       response = Twilio::TwiML::Response.new do |r|
-        r.Say "Beep. Beep. Beep."
+        r.Play ActionController::Base.helpers.asset_url("cash_register.mp3")
         r.Gather timeout: 60, numDigits: 1, method: "GET" do
           r.Say "What would you like to do?"
           3.times do
