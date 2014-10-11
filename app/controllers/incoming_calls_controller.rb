@@ -18,7 +18,7 @@ class IncomingCallsController < ApplicationController
         r.Say "What would you like to do?"
       end
 
-      render xml: resopnse.text and return
+      render xml: response.text and return
     end
 
   end
