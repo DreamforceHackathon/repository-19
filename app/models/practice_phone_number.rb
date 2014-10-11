@@ -1,6 +1,7 @@
 class PracticePhoneNumber < ActiveRecord::Base
 
   before_create :purchase_phone_number!
+  before_destroy :return_phone_number!
 
   validates :name, presence: true
   validates :owner, presence: true
@@ -16,6 +17,15 @@ class PracticePhoneNumber < ActiveRecord::Base
 
     twilio_phone_number = twilio_client.account.incoming_phone_numbers.create(area_code: area_code)
     update(phone_number: twilio_phone_number.phone_number)
+  end
+
+  def return_phone_number!
+    return true if phone_number.blank?
+
+    twilio_phone_number = twilio_client.account.incoming_phone_numbers.list(phone_number: phone_number).first
+    return true if twilio_phone_number.nil?
+
+    twilio_phone_number.delete
   end
 
   def owner=(value)
