@@ -11,9 +11,10 @@ gem 'unicorn', '~> 4.8.3'
 gem 'sidekiq', '~> 3.2.5'
 gem 'simple_form', '3.1.0.rc2'
 gem 'haml-rails', '~> 0.5.3'
-
 gem 'bourbon', '~> 3.2.1'
 gem 'neat', '~> 1.5.1'
+gem 'devise', '~> 3.4.0'
+gem 'twilio-ruby', '~> 3.13.1'
 
 group :development do
   gem 'spring'
@@ -22,8 +23,8 @@ group :development do
 end
 
 group :development, :test do
-  gem 'dotenv-rails', '~> 1.0.1'
   gem 'factory_girl_rails', '~> 4.4.1'
+  gem 'figaro', '~> 1.0.0'
 end
 
 group :test do
