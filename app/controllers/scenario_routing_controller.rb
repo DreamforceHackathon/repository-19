@@ -15,7 +15,7 @@ class ScenarioRoutingController < ApplicationController
           r.Say "#{digits} is not a valid choice. Please try again."
         else
           scenario = scenarios[digits.to_i - 1]
-          r.Say "Reekord after the beeps. When you're done with each recording, press hashtag."
+          r.Say "Reekord after the beeps. When you're done with each recording, press star."
           prompt = scenario.prompts.rank(:sequence).first
           r.Pause 2
           r.Redirect incoming_call_prompt_pre_recording_path(@incoming_call, prompt_id: prompt.id)
