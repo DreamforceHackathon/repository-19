@@ -10,7 +10,6 @@ class RecordingsController < ApplicationController
     action_url = post_recording_url(@recording)
 
     response = Twilio::TwiML::Response.new do |r|
-      r.Play ActionController::Base.helpers.asset_url("short_beep.mp3")
       r.Dial ENV["TWILIO_RECORDING_PHONE_NUMBER"], record: "record-from-answer", hangupOnStar: true, action: action_url
     end
 
