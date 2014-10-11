@@ -11,8 +11,6 @@ class PurposeRoutingController < ApplicationController
         if !valid_digits.include?(digits)
           r.Say "#{digits} is not a valid choice. Please try again."
         else
-          r.Say "You pressed #{params["Digits"]}."
-          r.Say "I found incoming call number #{@incoming_call.id}."
           r.Redirect incoming_call_scenario_routing_path(@incoming_call), method: "POST"
         end
       end
