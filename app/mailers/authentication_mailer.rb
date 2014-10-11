@@ -7,7 +7,25 @@ class AuthenticationMailer < Devise::Mailer
     twilio_client.messages.create(
       from: ENV["TWILIO_APP_PHONE_NUMBER"],
       to: record.phone_number,
-      body: "Call for Practice: Click on this link to set your password. #{link_to_reset_password}"
+      body: "Call for Practice: Click to set your password. #{link_to_reset_password}"
+    )
+  end
+
+  def confirmation_instructions(record, token, opts={})
+    link_to_confirm = confirmation_url(record, confirmation_token: token)
+    twilio_client.messages.create(
+      from: ENV["TWILIO_APP_PHONE_NUMBER"],
+      to: record.phone_number,
+      body: "Call for Practice: Click to confirm your phone number. #{link_to_confirm}"
+    )
+  end
+
+  def unlock_instructions(record, token, opts={})
+    link_to_unlock = unlock_url(record, unlock_token: token)
+    twilio_client.messages.create(
+      from: ENV["TWILIO_APP_PHONE_NUMBER"],
+      to: record.phone_number,
+      body: "Call for Practice: Click to unlock your account. #{link_to_unlock}"
     )
   end
 
