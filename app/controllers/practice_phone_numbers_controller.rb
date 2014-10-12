@@ -7,10 +7,13 @@ class PracticePhoneNumbersController < ApplicationController
 
   def new
     @practice_phone_number = PracticePhoneNumber.new
+    authorize @practice_phone_number
   end
 
   def create
     @practice_phone_number = PracticePhoneNumber.new(practice_phone_number_params)
+    authorize @practice_phone_number
+
     @practice_phone_number.owner = current_user
     if @practice_phone_number.save
       flash[:notice] = "Practice phone number purchased successfully."
@@ -27,6 +30,8 @@ class PracticePhoneNumbersController < ApplicationController
 
   def update
     @practice_phone_number = PracticePhoneNumber.find(params[:id])
+    authorize @practice_phone_number
+
     if @practice_phone_number.update(practice_phone_number_params)
       flash[:notice] = "Practice phone number updated successfully."
     end

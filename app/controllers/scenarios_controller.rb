@@ -1,7 +1,10 @@
 class ScenariosController < ApplicationController
+  before_action :redirect_to_root_unless_user_signed_in
 
   def create
     @scenario = Scenario.new(scenario_params)
+    authorize @scenario
+
     if @scenario.save
       flash[:notice] = "The scenario was added."
     else
@@ -12,6 +15,8 @@ class ScenariosController < ApplicationController
 
   def destroy
     @scenario = Scenario.find(params[:id])
+    authorize @scenario
+
     if @scenario.destroy
       flash[:notice] = "The scenario was deleted."
     end
@@ -20,6 +25,8 @@ class ScenariosController < ApplicationController
 
   def update
     @scenario = Scenario.find(params[:id])
+    authorize @scenario
+
     if @scenario.update(scenario_params)
       flash[:notice] = "The scenario was updated."
     end

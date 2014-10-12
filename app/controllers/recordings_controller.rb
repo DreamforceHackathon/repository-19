@@ -2,23 +2,25 @@ class RecordingsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def create
-    @incoming_call = IncomingCall.find(params[:incoming_call_id])
-    @recordable = params[:recordable_type].to_s.constantize.find(params[:recordable_id])
+    @incoming_call = IncomingCall.find_by(id: params[:incoming_call_id])
 
-    @recording = Recording.create(recordable: @recordable)
+    recordable_type, recordable_id = params[:recordable_type], params[:recordable_id]
 
-    action_url = post_recording_url(@recording)
+    if recordable_type && recordable_id
+      @recordable = recordable_type.to_s.constantize.find_by(id: recordable_id)
+    end
 
     response = Twilio::TwiML::Response.new do |r|
-      r.Dial ENV["TWILIO_RECORDING_PHONE_NUMBER"], record: "record-from-answer", hangupOnStar: true, action: action_url
+      if @recordable
+        @recording = Recording.create(recordable: @recordable)
+        action_url = post_recording_url(@recording)
+        r.Dial ENV["TWILIO_RECORDING_PHONE_NUMBER"], record: "record-from-answer", hangupOnStar: true, action: action_url
+      else
+        r.Say "There was a problem with the request. Goodbye."
+      end
     end
 
     render xml: response.text
-  end
-
-  def audio
-    @recording = Recording.find(params[:id])
-    redirect_to @recording.url
   end
 
 end

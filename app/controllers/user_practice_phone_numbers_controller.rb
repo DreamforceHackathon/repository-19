@@ -1,4 +1,5 @@
 class UserPracticePhoneNumbersController < ApplicationController
+  before_action :redirect_to_root_unless_user_signed_in
 
   def create
     @user_practice_phone_number = UserPracticePhoneNumber.new(user_practice_phone_number_params)

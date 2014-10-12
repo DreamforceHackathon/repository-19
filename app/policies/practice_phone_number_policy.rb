@@ -6,4 +6,12 @@ class PracticePhoneNumberPolicy < ApplicationPolicy
     end
   end
 
+  def create?
+    true
+  end
+
+  def update?
+    user == record.owner
+  end
+
 end

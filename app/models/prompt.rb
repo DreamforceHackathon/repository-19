@@ -3,6 +3,8 @@ class Prompt < ActiveRecord::Base
   ranks :sequence, with_same: :scenario_id
 
   belongs_to :scenario
+  has_many :responses, dependent: :destroy
+
   validates :scenario, presence: true
   validates :content, presence: true
 
