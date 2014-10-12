@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :sign_in_with_signature, if: -> { params["s"] }
 
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
 private
 
   def redirect_to_root_unless_user_signed_in
@@ -30,6 +32,11 @@ private
     sign_in(user)
   rescue ActiveSupport::MessageVerifier::InvalidSignature
     redirect_to root_path, notice: "That was not a valid signature."
+  end
+
+  def user_not_authorized
+    flash[:error] = "You are not authorized to perform this action."
+    redirect_to(request.referrer || root_path)
   end
 
 end
