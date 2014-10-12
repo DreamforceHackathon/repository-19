@@ -22,10 +22,10 @@ class PostRecordingController < ApplicationController
               r.Redirect next_url
             else
               r.Say "You're done! We're sending you back to the main menu."
-              r.Redirect incoming_call_purpose_routing_path(@incoming_call)
+              r.Redirect incoming_call_scenario_routing_path(@incoming_call)
             end
           when "2"
-            r.Redirect incoming_call_purpose_routing_path(@incoming_call)
+            r.Redirect incoming_call_scenario_routing_path(@incoming_call)
           end
         end
       end
