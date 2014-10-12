@@ -2,7 +2,7 @@ class IncomingCallsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    @incoming_calls = policy_scope(IncomingCall)
+    @incoming_calls = policy_scope(IncomingCall).order(created_at: :desc)
   end
 
   def show
