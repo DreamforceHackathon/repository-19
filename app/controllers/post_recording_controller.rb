@@ -32,14 +32,14 @@ class PostRecordingController < ApplicationController
               "Here's your answer to the question, '#{@recording.recordable.prompt.content}'. #{audio_recording_url(@recording)}"
             end
             twilio_client.account.messages.create(
-              from: ENV["TWILIO_APP_PHONE_NUMBER"],
+              from: @incoming_call.practice_phone_number.phone_number,
               to: @incoming_call.user.phone_number,
               body: body
             )
             r.Say "The text message was sent with the audio."
             r.Pause length: 1
           when "3"
-            r.Say "OK. I'm sending you back the main menu."
+            r.Say "OK. I'm sending you back to the main menu."
             r.Redirect incoming_call_scenario_routing_path(@incoming_call)
           end
         end
