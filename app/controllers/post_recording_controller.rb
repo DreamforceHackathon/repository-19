@@ -9,18 +9,23 @@ class PostRecordingController < ApplicationController
 
     digits = params["Digits"]
 
-    valid_digits = ["1"]
+    valid_digits = ["1","2"]
 
     response = Twilio::TwiML::Response.new do |r|
       if digits.present?
         if !valid_digits.include?(digits)
           r.Say "#{digits} is not a valid choice. Please try again."
         else
-          if next_url = next_recordable_url(@recording.recordable)
-            r.Redirect next_url
-          else
-            r.Say "You're done! We're sending you back to the main menu."
-            r.Redirect incoming_call_purpose_routing(@incoming_call)
+          case digits
+          when "1"
+            if next_url = next_recordable_url(@recording.recordable)
+              r.Redirect next_url
+            else
+              r.Say "You're done! We're sending you back to the main menu."
+              r.Redirect incoming_call_purpose_routing_path(@incoming_call)
+            end
+          when "2"
+            r.Redirect incoming_call_purpose_routing_path(@incoming_call)
           end
         end
       end
@@ -28,6 +33,7 @@ class PostRecordingController < ApplicationController
         3.times do
           r.Say "Here's your pitch."
           r.Say "When you're ready to continue, press 1."
+          r.Say "To to back to the main menu, press 2."
           r.Play @recording.url
         end
       end
