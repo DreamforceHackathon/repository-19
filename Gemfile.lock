@@ -131,6 +131,7 @@ GEM
     rake (10.3.2)
     ranked-model (0.4.0)
       activerecord (>= 3.1.12)
+    redcarpet (3.1.2)
     redis (3.1.0)
     redis-namespace (1.5.1)
       redis (~> 3.0, >= 3.0.4)
@@ -223,6 +224,7 @@ DEPENDENCIES
   rails (= 4.1.6)
   rails_12factor
   ranked-model (~> 0.4.0)
+  redcarpet (~> 3.1.2)
   rspec-rails (~> 3.1.0)
   sass-rails (~> 4.0.3)
   shoulda-matchers

@@ -22,4 +22,7 @@ Rails.application.routes.draw do
   resources :scenarios
   resources :prompts
 
+  get "privacy", to: "privacy#index", as: :privacy
+  get "terms", to: "terms#index", as: :terms
+
 end

@@ -17,6 +17,7 @@ gem 'devise', '~> 3.4.0'
 gem 'pundit', '~> 0.3.0'
 gem 'twilio-ruby', '~> 3.13.1'
 gem 'ranked-model', '~> 0.4.0'
+gem 'redcarpet', '~> 3.1.2'
 
 group :development do
   gem 'spring'
