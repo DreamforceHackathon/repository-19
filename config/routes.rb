@@ -13,6 +13,12 @@ Rails.application.routes.draw do
     post "recordings", to: "recordings#create", as: :recordings
   end
 
+  resources :recordings do
+    member do
+      get 'audio'
+    end
+  end
+
   post "recording_dummy", to: "recording_dummy#create", as: :recording_dummy
   post "post_recording/:id", to: "post_recording#create", as: :post_recording
 

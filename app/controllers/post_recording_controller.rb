@@ -29,7 +29,7 @@ class PostRecordingController < ApplicationController
           when "2"
             body = case @recording.recordable
             when Response
-              "Here's your answer to the question, '#{@recording.recordable.prompt.content}'. #{@recording.url}"
+              "Here's your answer to the question, '#{@recording.recordable.prompt.content}'. #{audio_recordings_url(@recording)}"
             end
             twilio_client.account.messages.create(
               from: ENV["TWILIO_APP_PHONE_NUMBER"],

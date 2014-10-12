@@ -16,4 +16,9 @@ class RecordingsController < ApplicationController
     render xml: response.text
   end
 
+  def audio
+    @recording = Recording.find(params[:id])
+    redirect_to @recording.url
+  end
+
 end
