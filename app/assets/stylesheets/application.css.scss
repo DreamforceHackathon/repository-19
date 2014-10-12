@@ -11,7 +11,19 @@
 @import "scenarios";
 @import "prompts";
 @import "practice_phone_numbers";
+@import "tables";
 
 .container {
   @include outer-container;
+}
+
+span.highlight {
+  background-color: yellow;
+  padding: 0px 4px;
+}
+
+@include media($large-screen) {
+  h2 {
+    font-size: $h2-font-size * 1.25;
+  }
 }

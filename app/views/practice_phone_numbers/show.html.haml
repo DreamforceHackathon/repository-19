@@ -1,5 +1,6 @@
 .practice_phone_number_header
-  %h2.practice-phone-number= @practice_phone_number.name
+  %h2.practice-phone-number
+    %span.highlight= @practice_phone_number.name
   = link_to "Edit", "#", class: "edit_practice_phone_number"
 
 = simple_form_for @practice_phone_number, html: { class: "hidden edit_practice_phone_number" } do |f|
