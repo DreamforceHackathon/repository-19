@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   end
 
   resources :recordings do
-    member { get 'audio' }
+    member do
+      get 'audio'
+    end
   end
 
   post "recording_dummy", to: "recording_dummy#create", as: :recording_dummy
