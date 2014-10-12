@@ -1,4 +1,5 @@
 class CompleteIncomingCallController < ApplicationController
+  skip_before_action :verify_authenticity_token
 
   def create
     @incoming_call = IncomingCall.find_by(twilio_sid: params["CallSid"])
@@ -19,6 +20,5 @@ private
   def twilio_client
     Twilio::REST::Client.new(ENV["TWILIO_ACCOUNT_SID"], ENV["TWILIO_AUTH_TOKEN"])
   end
-
 
 end
