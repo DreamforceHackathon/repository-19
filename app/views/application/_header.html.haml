@@ -11,6 +11,7 @@
         - if user_signed_in?
           %ul.submenu
             %li= link_to "Sign out", destroy_user_session_path, method: :delete
+            %li= link_to "Profile", edit_user_registration_path
         - else
           %ul.submenu
             %li= link_to "Sign in", new_user_session_path

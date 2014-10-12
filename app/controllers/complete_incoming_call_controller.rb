@@ -9,7 +9,7 @@ class CompleteIncomingCallController < ApplicationController
       twilio_client.messages.create(
         from: @incoming_call.practice_phone_number.phone_number,
         to: @incoming_call.user.phone_number,
-        body: "You recorded #{view_context.pluralize(recorded_response_count, "response")} during this practice session. http://www.callforpractice.com"
+        body: "You recorded #{view_context.pluralize(recorded_response_count, "response")} during this practice session. #{incoming_call_url(@incoming_call)}"
       )
     end
     head :ok
