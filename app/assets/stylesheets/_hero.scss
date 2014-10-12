@@ -35,24 +35,24 @@
       text-align: center;
 
       h1 {
-        font-size: 2.0em;
+        font-size: 2.4em;
         margin-bottom: .5em;
         font-weight: 800;
 
         @include media($large-screen) {
-          font-size: 2.6em;
+          font-size: 3.0em;
         }
       }
 
       p {
-        // font-family: $serif;
         margin: auto;
         margin-bottom: 0.5em;
         font-weight: 600;
         line-height: 1.4em;
+        font-size: 1.2em;
 
         @include media($large-screen) {
-          font-size: 1.1em;
+          font-size: 1.4em;
           max-width: 60%;
         }
       }
