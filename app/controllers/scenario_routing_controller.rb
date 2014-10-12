@@ -17,15 +17,18 @@ class ScenarioRoutingController < ApplicationController
             r.Say "#{digits} is not a valid choice. Please try again."
           else
             scenario = scenarios[digits.to_i - 1]
-            r.Say "Reekord after the beeps. When you're done with each recording, press star."
+            r.Say "Reekord after each beep. When you're done with each recording, press star."
             r.Say "After you hangup, a text message will be sent with a link with all of the recordings."
             prompt = scenario.prompts.rank(:sequence).first
             r.Pause length: 2
             r.Redirect incoming_call_prompt_pre_recording_path(@incoming_call, prompt_id: prompt.id)
           end
         end
-        r.Say "What scenario would you like to practice?"
-        r.Play ActionController::Base.helpers.asset_url("say1_what_situation.m4a")
+
+        # r.Say "What scenario would you like to practice?"
+        # What situation would you like to practice?
+        r.Play ActionController::Base.helpers.asset_url("say1_what_situation.mp3")
+
         r.Pause length: 1
         r.Gather timeout: 10, numDigits: 1, method: "POST" do
           3.times do
