@@ -25,9 +25,11 @@ class PostRecordingController < ApplicationController
         end
       end
       r.Gather timeout: 10, numDigits: 1, method: "POST" do
-        r.Say "Here's your pitch."
-        r.Say "When you're ready to continue, press 1."
-        r.Play @recording.url
+        3.times do
+          r.Say "Here's your pitch."
+          r.Say "When you're ready to continue, press 1."
+          r.Play @recording.url
+        end
       end
     end
 
@@ -44,7 +46,7 @@ private
       prompts = scenario.prompts.rank(:sequence).to_a
       return unless next_prompt = prompts[prompts.index(prompt) + 1]
 
-      incoming_phone_number = recordable.incoming_phone_number
+      incoming_call = recordable.incoming_call
       incoming_call_prompt_pre_recording_url(incoming_call, prompt_id: prompt.id)
     end
   end
