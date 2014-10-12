@@ -6,5 +6,6 @@ RSpec.describe IncomingCall do
   it { is_expected.to validate_presence_of :user }
   it { is_expected.to have_attribute :twilio_sid }
   it { is_expected.to validate_presence_of :twilio_sid }
+  it { is_expected.to have_many :responses }
 
 end
