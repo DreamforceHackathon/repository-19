@@ -3,7 +3,7 @@
   "description": "A mobile web site and interactive telephone experience that helps sales people practice their sales pitch.",
   "website": "http://www.callforpractice.com",
   "success_url": "/",
-  "logo": "https://raw.githubusercontent.com/DreamforceHackathon/repository-19/master/app/assets/images/call_for_practice_logo_blue.svg",
+  "logo": "",
   "addons": ["heroku-postgresql:hobby-dev"],
   "env": {
     "RAILS_ENV": "production",
