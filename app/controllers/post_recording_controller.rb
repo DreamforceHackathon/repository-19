@@ -3,16 +3,50 @@ class PostRecordingController < ApplicationController
 
   def create
     @recording = Recording.find(params[:id])
+    @incoming_call = @recording.recordable.incoming_call
 
     @recording.update(url: params["RecordingUrl"])
 
+    digits = params["Digits"]
+
+    valid_digits = ["1"]
+
     response = Twilio::TwiML::Response.new do |r|
-      r.Say "Here's what you said."
-      r.Pause length: 2
-      r.Play @recording.url
+      if digits.present?
+        if !valid_digits.include?(digits)
+          r.Say "#{digits} is not a valid choice. Please try again."
+        else
+          if next_url = next_recordable_url(@recording.recordable)
+            r.Redirect next_url
+          else
+            r.Say "You're done! We're sending you back to the main menu."
+            r.Redirect incoming_call_purpose_routing(@incoming_call)
+          end
+        end
+      end
+      r.Gather timeout: 10, numDigits: 1, method: "POST" do
+        r.Say "Here's your pitch."
+        r.Say "When you're ready to continue, press 1."
+        r.Play @recording.url
+      end
     end
 
     render xml: response.text
+  end
+
+private
+
+  def next_recordable_url(recordable)
+    case recordable
+    when Response
+      prompt = recordable.prompt
+      scenario = prompt.scenario
+      prompts = scenario.prompts.rank(:sequence).to_a
+      return unless next_prompt = prompts[prompts.index(prompt) + 1]
+
+      incoming_phone_number = recordable.incoming_phone_number
+      incoming_call_prompt_pre_recording_url(incoming_call, prompt_id: prompt.id)
+    end
   end
 
 end
