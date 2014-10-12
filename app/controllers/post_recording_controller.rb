@@ -37,6 +37,8 @@ class PostRecordingController < ApplicationController
               body: body,
               media_url: @recording.url
             )
+            r.Say "The text message was sent with the audio."
+            r.Pause length: 1
           when "3"
             r.Redirect incoming_call_scenario_routing_path(@incoming_call)
           end
@@ -46,7 +48,7 @@ class PostRecordingController < ApplicationController
         3.times do
           r.Say "Here's how you sounded."
           r.Say "When you're ready to continue, press 1."
-          r.Say "To have this audio sent to you your phone, press 2."
+          r.Say "To have this audio sent to your phone, press 2."
           r.Say "To go back to the main menu, press 3."
           r.Play @recording.url
         end
