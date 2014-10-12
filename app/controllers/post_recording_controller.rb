@@ -11,7 +11,7 @@ class PostRecordingController < ApplicationController
 
     digits = params["Digits"]
 
-    valid_digits = ["1","2","3"]
+    valid_digits = ["1","3"]
 
     response = Twilio::TwiML::Response.new do |r|
       if digits.present?
@@ -26,18 +26,6 @@ class PostRecordingController < ApplicationController
               r.Say "You're done! We're sending you back to the main menu."
               r.Redirect incoming_call_scenario_routing_path(@incoming_call)
             end
-          when "2"
-            body = case @recording.recordable
-            when Response
-              "Here's your answer to the question, '#{@recording.recordable.prompt.content}'. #{audio_recording_url(@recording)}"
-            end
-            twilio_client.account.messages.create(
-              from: @incoming_call.practice_phone_number.phone_number,
-              to: @incoming_call.user.phone_number,
-              body: body
-            )
-            r.Say "The text message was sent with the audio."
-            r.Pause length: 1
           when "3"
             r.Say "OK. I'm sending you back to the main menu."
             r.Redirect incoming_call_scenario_routing_path(@incoming_call)
@@ -48,7 +36,6 @@ class PostRecordingController < ApplicationController
         3.times do
           r.Say "Here's what you sounded like."
           r.Say "When you're ready to continue, press 1."
-          r.Say "To have this audio sent to your phone, press 2."
           r.Say "To go back to the main menu, press 3."
           r.Play @recording.url
         end
