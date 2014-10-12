@@ -1,3 +1,7 @@
-# Call for Practice
+## ![logo](app/assets/images/call_for_practice_icon_blue.png)Introduction
 
-[ ![Codeship Status for DreamforceHackathon/repository-19](https://codeship.io/projects/ea76bad0-330e-0132-4537-5696ea0452a8/status)](https://codeship.io/projects/40550)
+
+
+[Call for Practice](http://www.callforpractice.com) is a mobile web site and interactive telephone experience that helps sales people practice their sales pitch.
+
+The application was originally built as part of the [Salesforce $1 Million Hackathon at Dreamforce 2014](https://developer.salesforce.com/million-dollar-hackathon).

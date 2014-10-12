@@ -15,5 +15,8 @@
           .incoming-call-response-count
             = link_to pluralize(incoming_call.responses.count, "response"), incoming_call
         %td
-          .incoming-call-user= incoming_call.user
+          .incoming-call-user
+            - if incoming_call.user == current_user
+              %span.me me
+            = incoming_call.user
           .incoming-call-practice-phone-number= incoming_call.practice_phone_number

@@ -19,7 +19,10 @@
       - responses.each do |response|
         %tr
           %td.response
-            .user= response.user
+            .user
+              - if response.user == current_user
+                %span.me me
+              = response.user
             .created-at= time_ago_in_words(response.created_at) + " ago"
             - if response.recording_mp3_url
               .response-audio= audio_tag(response.recording_mp3_url, controls: true)

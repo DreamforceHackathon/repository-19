@@ -13,7 +13,10 @@
   %dt Number
   %dd= @practice_phone_number.phone_number
   %dt Owner
-  %dd= @practice_phone_number.owner
+  %dd
+    - if @practice_phone_number.owner == current_user
+      %span.me me
+    = @practice_phone_number.owner
   %dt Users
   %dd
     %ul
@@ -21,6 +24,8 @@
         - uppn.user != @practice_phone_number.owner
       - end.each do |user_practice_phone_number|
         %li
+          - if user_practice_phone_number.user == current_user
+            %span.me me
           = user_practice_phone_number.user
           - if policy(user_practice_phone_number).destroy?
             = link_to "remove", user_practice_phone_number_path(user_practice_phone_number), method: :delete, rel: "nofollow", class: "delete", data: { confirm: "Are you sure?" }
