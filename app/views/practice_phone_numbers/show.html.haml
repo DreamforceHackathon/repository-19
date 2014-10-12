@@ -58,7 +58,7 @@
             - prompts_ranked = scenario.prompts.rank(:sequence).to_a
             - prompts_ranked.each do |prompt|
               %li.prompt
-                = prompt
+                = link_to prompt, prompt
                 - if policy(prompt).update?
                   %span.links
                     = link_to "edit", "#", class: "edit_prompt"

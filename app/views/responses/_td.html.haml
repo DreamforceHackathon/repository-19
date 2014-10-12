@@ -1,0 +1,7 @@
+.prompt
+  .scenario-name= response_scenario_name(response).downcase
+  .prompt-content= response.prompt.content
+- if response.recording_mp3_url
+  .response-audio= audio_tag(response.recording_mp3_url, controls: true)
+- else
+  .response-audio-missing Nothing recorded.

@@ -32,6 +32,11 @@ class PromptsController < ApplicationController
     redirect_to @prompt.practice_phone_number
   end
 
+  def show
+    @prompt = Prompt.find(params[:id])
+    authorize @prompt
+  end
+
 private
 
   def prompt_params
