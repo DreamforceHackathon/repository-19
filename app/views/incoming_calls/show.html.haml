@@ -4,8 +4,10 @@
 %dl
   %dt User
   %dd= @incoming_call.user
+  %dt When
+  %dd= time_ago_in_words(@incoming_call.created_at) + " ago"
 
-%table
+%table.incoming-calls
   %thead
     %tr
       %th{width: "20px;"} #
@@ -14,6 +16,11 @@
     - @incoming_call.responses.order(created_at: :asc).each_with_index do |response, index|
       %tr
         %td= index + 1
-        %td
-          .response-prompt= response.prompt
-          .response-audio= audio_tag(response.recording.url, controls: true)
+        %td.response
+          .prompt
+            .scenario-name= response_scenario_name(response).downcase
+            .prompt-content= response.prompt.content
+          - if response.recording_mp3_url
+            .response-audio= audio_tag(response.recording_mp3_url, controls: true)
+          - else
+            .response-audio-missing Nothing recorded.

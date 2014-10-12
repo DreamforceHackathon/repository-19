@@ -7,4 +7,11 @@ class Response < ActiveRecord::Base
   validates :prompt, presence: true
   validates :incoming_call, presence: true
 
+  def recording_mp3_url
+    return unless recording
+    return unless recording.url.present?
+
+    recording.url
+  end
+
 end
