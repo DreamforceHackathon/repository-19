@@ -20,8 +20,8 @@ class PostRecordingController < ApplicationController
         else
           case digits
           when "1"
-            if next_url = next_recordable_url(@recording.recordable)
-              r.Redirect next_url
+            if next_prompt_url = next_recordable_url(@recording.recordable)
+              r.Redirect next_prompt_url
             else
               r.Say "You're done! We're sending you back to the main menu."
               r.Redirect incoming_call_scenario_routing_path(@incoming_call)
@@ -40,13 +40,14 @@ class PostRecordingController < ApplicationController
             r.Say "The text message was sent with the audio."
             r.Pause length: 1
           when "3"
+            r.Say "OK. I'm sending you back the main menu."
             r.Redirect incoming_call_scenario_routing_path(@incoming_call)
           end
         end
       end
       r.Gather timeout: 10, numDigits: 1, method: "POST" do
         3.times do
-          r.Say "Here's how you sounded."
+          r.Say "Here's what you sounded like."
           r.Say "When you're ready to continue, press 1."
           r.Say "To have this audio sent to your phone, press 2."
           r.Say "To go back to the main menu, press 3."
