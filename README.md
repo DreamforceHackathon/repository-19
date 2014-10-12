@@ -9,11 +9,12 @@ To learn more about the service from a user's point of view, try it out at [www.
 ## Open Source
 Call for Practice is released as open source software under the simple and permissive [MIT License](/LICENSE).
 
-## Deploy on Heroku
-In addition to the
+Feel free to hack on it to meet your needs. Want to contribute? :thumbsup:
+
+The application is small and hacked together very quickly, but it also is a good example of a number of Rails and Twilio concepts without being too difficult to understand.
 
 ## Twilio Requirements
-Twilio is used for voice and messaging capabilities. If you host the application yourself, you will need to [sign up for a Twilio account](https://www.twilio.com/try-twilio). Once you've done that, you'll need to add four environment variables:
+Twilio is used for voice and messaging capabilities. **If you host the application yourself**, you will need to [sign up for a Twilio account](https://www.twilio.com/try-twilio). Once you've done that, you'll need to add four environment variables:
 
 - `TWILIO_ACCOUNT_SID` Account SID from your Twilio account settings.
 - `TWILIO_AUTH_TOKEN`: Auth Token from your Twilio account settings.
@@ -27,3 +28,6 @@ If you're hosting on Heroku, adding an environment variable looks somethink like
 Also, you'll need to set the request url for the phone number that you set as the `TWILIO_RECORDING_PHONE_NUMBER` for your application to `https://your.application.host/recording_dummy` where `your.application.host` is, well, your application host (like `www.callforpractice.com`).
 
 ![twilio request url](public/set_twilio_phone_number.jpg)
+
+## Deploy on Heroku
+In addition to the
