@@ -30,4 +30,4 @@ Also, you'll need to set the request url for the phone number that you set as th
 ![twilio request url](public/set_twilio_phone_number.jpg)
 
 ## Deploy on Heroku
-In addition to the
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
