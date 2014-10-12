@@ -3,6 +3,7 @@ class RecordingDummyController < ApplicationController
 
   def create
     response = Twilio::TwiML::Response.new do |r|
+      r.Say ""
       r.Pause length: 600
     end
 
