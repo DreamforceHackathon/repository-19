@@ -3,6 +3,7 @@
   "description": "A mobile web site and interactive telephone experience that helps sales people practice their sales pitch.",
   "website": "http://www.callforpractice.com",
   "success_url": "/",
+  "logo": "",
   "addons": ["heroku-postgresql:hobby-dev"],
   "env": {
     "RAILS_ENV": "production",
@@ -11,16 +12,20 @@
             "generator": "secret"
     },
     "TWILIO_RECORDING_PHONE_NUMBER": {
-            "description": "The Twilio phone number used to record responses."
+            "description": "The Twilio phone number used to record responses.",
+            "required": false
     },
     "TWILIO_ACCOUNT_SID": {
-            "description": "The SID of the Twilio account."
+            "description": "The SID of the Twilio account.",
+            "required": false
     },
     "TWILIO_AUTH_TOKEN": {
-            "description": "The auth token of the Twilio account."
+            "description": "The auth token of the Twilio account.",
+            "required": false
     },
     "TWILIO_APP_PHONE_NUMBER": {
-            "description": "The Twilio phone number used send platform messages."
+            "description": "The Twilio phone number used send platform messages.",
+            "required": false
     }
   },
   "scripts": {
