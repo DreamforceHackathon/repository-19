@@ -5,7 +5,7 @@ class PurposeRoutingController < ApplicationController
     @incoming_call = IncomingCall.find(params[:incoming_call_id])
 
     digits = params["Digits"]
-    valid_digits = ["1","2"]
+    valid_digits = ["1"]
     response = Twilio::TwiML::Response.new do |r|
       if digits.present?
         if !valid_digits.include?(digits)

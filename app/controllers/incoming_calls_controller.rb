@@ -10,7 +10,7 @@ class IncomingCallsController < ApplicationController
         r.Say "You are not authorized to call for practice on this number. Goodbye."
       else
         @incoming_call = @practice_phone_number.incoming_calls.create!(twilio_sid: params["CallSid"], user: @user)
-        r.Redirect incoming_call_purpose_routing_path(@incoming_call), method: "POST"
+        r.Redirect incoming_call_scenario_routing_path(@incoming_call), method: "POST"
       end
     end
     render xml: response.text
