@@ -1,4 +1,4 @@
-## ![logo](app/assets/images/call_for_practice_icon_blue.png)Introduction
+## ![logo](app/assets/images/call_for_practice_icon_blue_150x150.png) Call for Practice
 
 
 
