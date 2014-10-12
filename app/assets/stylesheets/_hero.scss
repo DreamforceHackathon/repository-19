@@ -39,8 +39,17 @@
         margin-bottom: .5em;
         font-weight: 800;
 
+        span.benefit {
+          background-color: yellow;
+          padding-left: 4px;
+          padding-right: 4px;
+        }
+
         @include media($large-screen) {
           font-size: 3.0em;
+          span.benefit {
+            padding: auto 6px;
+          }
         }
       }
 
@@ -50,6 +59,12 @@
         font-weight: 600;
         line-height: 1.4em;
         font-size: 1.2em;
+
+        span.benefit {
+          background-color: white;
+          padding-left: 4px;
+          padding-right: 4px;
+        }
 
         @include media($large-screen) {
           font-size: 1.4em;
