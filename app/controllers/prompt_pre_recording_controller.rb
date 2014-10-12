@@ -12,12 +12,13 @@ class PromptPreRecordingController < ApplicationController
 
     response = Twilio::TwiML::Response.new do |r|
       if @response
-        r.Say "Question number #{prompt_sequence}."
+        r.Play ActionController::Base.helpers.asset_url("say_heres_next_question.mp3")
+        r.Pause length: 1
         r.Say @prompt.content
         r.Pause length: 2
         r.Redirect incoming_call_recordings_path(@incoming_call, recordable_type: @response.class.to_s, recordable_id: @response.id)
       else
-        r.Say "There was a problem with the request."
+        r.Play ActionController::Base.helpers.asset_url("say_problem_with_request.mp3")
       end
     end
 

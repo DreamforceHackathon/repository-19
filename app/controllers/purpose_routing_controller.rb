@@ -11,7 +11,7 @@ class PurposeRoutingController < ApplicationController
       if @incoming_call
         if digits.present?
           if !valid_digits.include?(digits)
-            r.Say "#{digits} is not a valid choice. Please try again."
+            r.Play ActionController::Base.helpers.asset_url("say_not_valid_choice.mp3")
           else
             r.Redirect incoming_call_scenario_routing_path(@incoming_call), method: "POST"
           end

@@ -18,9 +18,9 @@ class IncomingCallsController < ApplicationController
     response = Twilio::TwiML::Response.new do |r|
       r.Play ActionController::Base.helpers.asset_url("welcome_tones.mp3")
       if @user.nil?
-        r.Say "You are not authorized to call for practice on this number. Goodbye."
+        r.Play ActionController::Base.helpers.asset_url("say_not_authorized_from_number.mp3")
       elsif @practice_phone_number.nil?
-        r.Say "The request was invalid. Goodbye."
+        r.Play ActionController::Base.helpers.asset_url("say_problem_with_request.mp3")
       else
         @incoming_call = @practice_phone_number.incoming_calls.create!(twilio_sid: params["CallSid"], user: @user)
         r.Redirect incoming_call_scenario_routing_path(@incoming_call), method: "POST"

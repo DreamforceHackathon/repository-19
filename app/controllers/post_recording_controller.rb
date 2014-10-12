@@ -17,32 +17,32 @@ class PostRecordingController < ApplicationController
       if @recording.present?
         if digits.present?
           if !valid_digits.include?(digits)
-            r.Say "#{digits} is not a valid choice. Please try again."
+            r.Play ActionController::Base.helpers.asset_url("say_not_valid_choice.mp3")
           else
             case digits
             when "1"
               if next_prompt_url = next_recordable_url(@recording.recordable)
                 r.Redirect next_prompt_url
               else
-                r.Say "You're done! We're sending you back to the main menu."
+                r.Play ActionController::Base.helpers.asset_url("say_done_with_situation.mp3")
                 r.Redirect incoming_call_scenario_routing_path(@incoming_call)
               end
             when "3"
-              r.Say "OK. I'm sending you back to the main menu."
+              r.Play ActionController::Base.helpers.asset_url("say_ok_back_to_main_menu.mp3")
               r.Redirect incoming_call_scenario_routing_path(@incoming_call)
             end
           end
         end
         r.Gather timeout: 10, numDigits: 1, method: "POST" do
           3.times do
-            r.Say "Here's what you sounded like."
-            r.Say "When you're ready to continue, press 1."
-            r.Say "To go back to the main menu, press 3."
+            r.Play ActionController::Base.helpers.asset_url("say_ready_to_continue_press_1.mp3")
+            r.Play ActionController::Base.helpers.asset_url("say_main_menu_press_3.mp3")
+            r.Play ActionController::Base.helpers.asset_url("say_play_your_response_back.mp3")
             r.Play @recording.url
           end
         end
       else
-        r.Say "The request was invalid. Goodbye."
+        r.Play ActionController::Base.helpers.asset_url("say_problem_with_request.mp3")
       end
     end
 

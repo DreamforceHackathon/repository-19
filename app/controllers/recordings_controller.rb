@@ -16,7 +16,7 @@ class RecordingsController < ApplicationController
         action_url = post_recording_url(@recording)
         r.Dial ENV["TWILIO_RECORDING_PHONE_NUMBER"], record: "record-from-answer", hangupOnStar: true, action: action_url
       else
-        r.Say "There was a problem with the request. Goodbye."
+        r.Play ActionController::Base.helpers.asset_url("say_problem_with_request.mp3")
       end
     end
 
