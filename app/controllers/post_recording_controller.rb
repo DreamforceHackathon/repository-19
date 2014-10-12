@@ -29,13 +29,12 @@ class PostRecordingController < ApplicationController
           when "2"
             body = case @recording.recordable
             when Response
-              "Here's your answer to the question, '#{@recording.recordable.prompt.content}'"
+              "Here's your answer to the question, '#{@recording.recordable.prompt.content}'. #{@recording.url}"
             end
             twilio_client.account.messages.create(
               from: ENV["TWILIO_APP_PHONE_NUMBER"],
               to: @incoming_call.user.phone_number,
-              body: body,
-              media_url: @recording.url
+              body: body
             )
             r.Say "The text message was sent with the audio."
             r.Pause length: 1
