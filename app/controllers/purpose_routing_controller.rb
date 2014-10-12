@@ -15,10 +15,9 @@ class PurposeRoutingController < ApplicationController
         end
       end
       r.Gather timeout: 10, numDigits: 1, method: "POST" do
-        r.Say "What would you like to do?"
+        r.Say "Are you ready for some practice?"
         3.times do
-          r.Say "Press 1 to practice."
-          r.Say "Press 2 to provide feedback."
+          r.Say "Press 1 to continue."
           r.Pause length: 1
         end
       end
