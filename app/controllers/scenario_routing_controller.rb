@@ -25,6 +25,7 @@ class ScenarioRoutingController < ApplicationController
           end
         end
         r.Say "What scenario would you like to practice?"
+        r.Play ActionController::Base.helpers.asset_url("say1_what_situation.m4a")
         r.Pause length: 1
         r.Gather timeout: 10, numDigits: 1, method: "POST" do
           3.times do
