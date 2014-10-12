@@ -47,7 +47,7 @@ private
       return unless next_prompt = prompts[prompts.index(prompt) + 1]
 
       incoming_call = recordable.incoming_call
-      incoming_call_prompt_pre_recording_url(incoming_call, prompt_id: prompt.id)
+      incoming_call_prompt_pre_recording_url(incoming_call, prompt_id: next_prompt.id)
     end
   end
 
