@@ -27,10 +27,11 @@ class ScenarioRoutingController < ApplicationController
         r.Play ActionController::Base.helpers.asset_url("say1_what_situation.mp3")
 
         r.Pause length: 1
+
         r.Gather timeout: 10, numDigits: 1, method: "POST" do
           3.times do
             scenarios.each_with_index do |scenario, index|
-              r.Play ActionController::Base.helpers.asset_url("say_press_#{index + 1}_for")
+              r.Play ActionController::Base.helpers.asset_url("say_press_#{index + 1}_for.mp3")
               r.Say scenario.name
               r.Pause length: 1
             end
