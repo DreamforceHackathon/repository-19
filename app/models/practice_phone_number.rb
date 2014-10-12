@@ -23,7 +23,9 @@ class PracticePhoneNumber < ActiveRecord::Base
       area_code: area_code,
       friendly_name: name,
       voice_url: practice_phone_number_incoming_calls_url(id, format: :xml),
-      voice_method: "POST"
+      voice_method: "POST",
+      status_callback: complete_incoming_call_url,
+      status_callback_method: "POST"
     )
     update(phone_number: twilio_phone_number.phone_number)
   end
