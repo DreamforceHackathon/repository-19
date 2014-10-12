@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   post "recording_dummy", to: "recording_dummy#create", as: :recording_dummy
   post "post_recording/:id", to: "post_recording#create", as: :post_recording
 
-  post "complete_incoming_call", to: "complete_incoming_call#post", as: :complete_incoming_call
+  post "complete_incoming_call", to: "complete_incoming_call#create", as: :complete_incoming_call
 
   resources :user_practice_phone_numbers
   resources :scenarios
