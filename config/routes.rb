@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   resources :user_practice_phone_numbers
   resources :scenarios
   resources :prompts
+  resources :responses
 
   get "privacy", to: "privacy#index", as: :privacy
   get "terms", to: "terms#index", as: :terms

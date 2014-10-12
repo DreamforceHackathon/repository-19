@@ -2,7 +2,7 @@ class Response < ActiveRecord::Base
 
   belongs_to :prompt
   belongs_to :incoming_call
-  has_one :recording, as: :recordable
+  has_one :recording, as: :recordable, dependent: :destroy
 
   validates :prompt, presence: true
   validates :incoming_call, presence: true

@@ -1,6 +1,9 @@
 .prompt
   .scenario-name= response_scenario_name(response).downcase
-  .prompt-content= response.prompt.content
+  .prompt-content
+    = response.prompt.content
+    - if policy(response).destroy?
+      = link_to "delete", response_path(response), method: :delete, data: { confirm: "Are you sure?" }
 - if response.recording_mp3_url
   .response-audio= audio_tag(response.recording_mp3_url, controls: true)
 - else
