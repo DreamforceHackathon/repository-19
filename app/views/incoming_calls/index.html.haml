@@ -1,0 +1,19 @@
+%h2
+  %span.highlight Calls
+
+%table
+  %thead
+    %tr
+      %th Call
+      %th User
+  %tbody
+    - @incoming_calls.each do |incoming_call|
+      %tr
+        %td
+          .incoming-call-created-at
+            = time_ago_in_words(incoming_call.created_at) + " ago"
+          .incoming-call-response-count
+            = link_to pluralize(incoming_call.responses.count, "response"), incoming_call
+        %td
+          .incoming-call-user= incoming_call.user
+          .incoming-call-practice-phone-number= incoming_call.practice_phone_number

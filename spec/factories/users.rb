@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :user do
-    first_name "Billy"
-    last_name "Bean"
-    phone_number "+18108443757"
+    first_name "Sean"
+    last_name "Devine"
+    phone_number "+18885551212"
     password "12345678"
     after(:build) do |user|
       user.skip_confirmation!

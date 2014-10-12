@@ -1,0 +1,19 @@
+%h2
+  %span.highlight Call
+
+%dl
+  %dt User
+  %dd= @incoming_call.user
+
+%table
+  %thead
+    %tr
+      %th{width: "20px;"} #
+      %th Response
+  %tbody
+    - @incoming_call.responses.order(created_at: :asc).each_with_index do |response, index|
+      %tr
+        %td= index + 1
+        %td
+          .response-prompt= response.prompt
+          .response-audio= audio_tag(response.recording.url, controls: true)

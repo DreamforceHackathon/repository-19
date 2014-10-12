@@ -38,7 +38,7 @@ class PracticePhoneNumber < ActiveRecord::Base
   end
 
   def to_s
-    "#{name} (#{phone_number})"
+    "#{name}, #{phone_number}"
   end
 
 private

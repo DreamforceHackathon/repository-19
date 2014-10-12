@@ -1,6 +1,15 @@
 class IncomingCallsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
+  def index
+    @incoming_calls = policy_scope(IncomingCall)
+  end
+
+  def show
+    @incoming_call = IncomingCall.find(params[:id])
+    authorize @incoming_call
+  end
+
   def create
     @practice_phone_number = PracticePhoneNumber.find(params[:practice_phone_number_id])
     @user = @practice_phone_number.users.find_by(phone_number: params["From"])

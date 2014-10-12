@@ -21,10 +21,13 @@ class User < ActiveRecord::Base
   end
 
   def to_s
+    [name, phone_number].compact.join(", ")
+  end
+
+  def name
     return [first_name, last_name].join(" ") if first_name.present? && last_name.present?
     return first_name if first_name.present?
     return last_name if last_name.present?
-    return phone_number
   end
 
   def phone_number=(value)
