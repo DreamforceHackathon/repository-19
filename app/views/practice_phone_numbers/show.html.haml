@@ -42,6 +42,8 @@
               = link_to "&uarr;".html_safe, scenario_path(scenario, scenario: { sequence_position: "up" }), method: :patch, rel: "nofollow"
             - unless scenarios_ranked.last == scenario
               = link_to "&darr;".html_safe, scenario_path(scenario, scenario: { sequence_position: "down" }), method: :patch, rel: "nofollow"
+          = simple_form_for scenario do |f|
+            = f.input :name
 
           %ol.prompts
             - prompts_ranked = scenario.prompts.rank(:sequence).to_a

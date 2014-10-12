@@ -1,7 +1,6 @@
 %header.centered-navigation
   .centered-navigation-wrapper
-    = link_to root_path, class: "mobile-logo" do
-      = image_tag "call_for_practice_icon_64x64.png"
+    = link_to image_tag("call_for_practice_icon_64x64.png"), root_path, class: "mobile-logo"
     %a.centered-navigation-menu-button{href: ""} MENU
     %ul.centered-navigation-menu
       %li.nav-link.logo
