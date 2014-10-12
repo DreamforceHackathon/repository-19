@@ -16,7 +16,7 @@ class IncomingCallsController < ApplicationController
     @user = @practice_phone_number.users.find_by(phone_number: params["From"])
 
     response = Twilio::TwiML::Response.new do |r|
-      r.Play ActionController::Base.helpers.asset_url("cash_register.mp3")
+      r.Play ActionController::Base.helpers.asset_url("welcome_tones.mp3")
       if @user.nil?
         r.Say "You are not authorized to call for practice on this number. Goodbye."
       elsif @practice_phone_number.nil?
