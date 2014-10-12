@@ -5,11 +5,13 @@ class PostRecordingController < ApplicationController
     @recording = Recording.find(params[:id])
     @incoming_call = @recording.recordable.incoming_call
 
-    @recording.update(url: params["RecordingUrl"])
+    if params["RecordingUrl"].present?
+      @recording.update(url: params["RecordingUrl"])
+    end
 
     digits = params["Digits"]
 
-    valid_digits = ["1","2"]
+    valid_digits = ["1","2","3"]
 
     response = Twilio::TwiML::Response.new do |r|
       if digits.present?
@@ -25,15 +27,27 @@ class PostRecordingController < ApplicationController
               r.Redirect incoming_call_scenario_routing_path(@incoming_call)
             end
           when "2"
+            body = case @recording.recordable
+            when Response
+              "Here's your answer to the question, '#{@recording.recordable.prompt.content}'"
+            end
+            twilio_client.account.messages.create(
+              from: ENV["TWILIO_APP_PHONE_NUMBER"],
+              to: @incoming_call.user.phone_number,
+              body: body,
+              media_url: @recording.url
+            )
+          when "3"
             r.Redirect incoming_call_scenario_routing_path(@incoming_call)
           end
         end
       end
       r.Gather timeout: 10, numDigits: 1, method: "POST" do
         3.times do
-          r.Say "Here's your pitch."
+          r.Say "Here's how you sounded."
           r.Say "When you're ready to continue, press 1."
-          r.Say "To to back to the main menu, press 2."
+          r.Say "To have this audio sent to you your phone, press 2."
+          r.Say "To go back to the main menu, press 3."
           r.Play @recording.url
         end
       end
@@ -55,6 +69,10 @@ private
       incoming_call = recordable.incoming_call
       incoming_call_prompt_pre_recording_url(incoming_call, prompt_id: next_prompt.id)
     end
+  end
+
+  def twilio_client
+    Twilio::REST::Client.new(ENV["TWILIO_ACCOUNT_SID"], ENV["TWILIO_AUTH_TOKEN"])
   end
 
 end
