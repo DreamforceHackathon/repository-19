@@ -1,5 +1,6 @@
 class IncomingCallsController < ApplicationController
   skip_before_action :verify_authenticity_token
+  before_action :redirect_to_root_unless_user_signed_in
 
   def index
     @incoming_calls = policy_scope(IncomingCall).order(created_at: :desc)

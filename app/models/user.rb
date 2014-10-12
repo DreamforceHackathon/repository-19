@@ -34,6 +34,22 @@ class User < ActiveRecord::Base
     write_attribute :phone_number, clean_phone_number(value)
   end
 
+  def signature
+    verifier.generate id
+  end
+
+  delegate :verifier, to: :class
+
+  class << self
+    def verifier
+      Rails.application.message_verifier(:user_signature)
+    end
+
+    def find_by_signature(signature)
+      find_by id: verifier.verify(signature)
+    end
+  end
+
 private
 
   def clean_phone_number(value)

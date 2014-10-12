@@ -1,5 +1,5 @@
 class PracticePhoneNumbersController < ApplicationController
-  before_action :redirect_to_root_unless_current_user
+  before_action :redirect_to_root_unless_user_signed_in
 
   def index
     @practice_phone_numbers = policy_scope(PracticePhoneNumber)
